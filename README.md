@@ -1462,22 +1462,26 @@ Very short recordings do not receive meaningful local acoustic analysis.
 
 # 📜 Model Response Parsing
 
-Gemini is requested to return:
+Gemini is requested to return a response using the MIME type:
 
 ```text
 application/json
 ```
 
-The parser additionally protects against accidental markdown fences:
+The parser also protects against accidental Markdown code fences around the JSON response.
 
-```text
+For example, Gemini may return:
+
+````text
 ```json
 { ... }
 ````
 
 ```
 
-If valid JSON cannot be extracted, the application creates a safe fallback response.
+The application removes these fences before attempting to parse the response as JSON.
+
+If valid JSON still cannot be extracted, the application creates a safe fallback response instead of allowing the parsing failure to crash the application.
 
 ---
 
@@ -1485,35 +1489,42 @@ If valid JSON cannot be extracted, the application creates a safe fallback respo
 
 The POC follows several important principles:
 
-### 1. Customer protection
+### 1. Customer Protection
 
-The analysis should support de-escalation and appropriate assistance.
+The analysis is designed to support **de-escalation and appropriate customer assistance**, rather than using emotion analysis to increase collection pressure.
 
-### 2. Human oversight
+### 2. Human Oversight
 
-Critical situations should be routed to humans.
+Potentially critical situations are routed toward **human intervention** through the application's escalation guardrails.
 
 ### 3. Explainability
 
-The application exposes evidence and limitations instead of only showing a score.
+The application exposes supporting evidence, reasoning, alternative explanations, and limitations rather than presenting only a single stress score.
 
-### 4. Graceful degradation
+### 4. Graceful Degradation
 
-The application can continue operating when the Gemini API is unavailable.
+If the Gemini API is unavailable, the application can continue operating using the local acoustic heuristic fallback.
 
-### 5. Explicit guardrails
+### 5. Explicit Guardrails
 
-Critical escalation rules are enforced in application code.
+Critical escalation rules are enforced directly in application code and are not dependent solely on the model's response.
 
-### 6. Multilingual support
+### 6. Multilingual Support
 
-The architecture does not assume that customers speak English.
+The architecture does not assume that customers speak English and supports multilingual and code-switched speech through the Gemini analysis workflow.
 
-### 7. Analytical honesty
+### 7. Analytical Honesty
 
-The system explicitly distinguishes model-based analysis from crude offline acoustic heuristics.
+The application clearly distinguishes between:
+
+- Gemini-based multimodal analysis
+- Local signal-processing measurements
+- Offline heuristic estimates
+
+The offline heuristic is explicitly treated as a limited acoustic proxy rather than a substitute for contextual AI analysis.
 
 ---
+```
 
 # 📄 POC Disclaimer
 
