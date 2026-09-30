@@ -1470,12 +1470,12 @@ application/json
 
 The parser additionally protects against accidental markdown fences:
 
-````text
+```text
 ```json
 { ... }
 ````
 
-````
+```
 
 If valid JSON cannot be extracted, the application creates a safe fallback response.
 
