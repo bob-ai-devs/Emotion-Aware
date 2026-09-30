@@ -4,6 +4,8 @@ numpy>=1.26
 matplotlib>=3.8
 seaborn>=0.13
 plotly>=5.22
-scipy>=1.11
+
+librosa
+soundfile
 
 google-genai
