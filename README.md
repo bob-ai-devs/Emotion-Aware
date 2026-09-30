@@ -1475,9 +1475,8 @@ For example, Gemini may return:
 ````text
 ```json
 { ... }
-````
-
 ```
+````
 
 The application removes these fences before attempting to parse the response as JSON.
 
@@ -1517,14 +1516,13 @@ The architecture does not assume that customers speak English and supports multi
 
 The application clearly distinguishes between:
 
-- Gemini-based multimodal analysis
-- Local signal-processing measurements
-- Offline heuristic estimates
+* Gemini-based multimodal analysis
+* Local signal-processing measurements
+* Offline heuristic estimates
 
 The offline heuristic is explicitly treated as a limited acoustic proxy rather than a substitute for contextual AI analysis.
 
 ---
-```
 
 # 📄 POC Disclaimer
 
