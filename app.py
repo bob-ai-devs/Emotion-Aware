@@ -775,7 +775,7 @@ with st.sidebar:
     if choice:
         st.session_state.api_key = ""
     else:
-        st.session_state.api_key = st.secrets(["GEMINI_API_KEY"])
+        st.session_state.api_key = st.secrets["GEMINI_API_KEY"]
 
     st.markdown("### \U0001F9E0 Model")
     model_id = st.selectbox(
